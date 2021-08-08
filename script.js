@@ -1,7 +1,7 @@
 // console.log("hello!");
 
 $(init);
-//This function is meant to keep 
+//This function is meant to keep
 function init() {
   $("#currentDay").text(moment().format("LLL"));
 
@@ -19,9 +19,22 @@ function init() {
   $(".saveBtn").sectionId("click", handleSave);
 }
 
+//Adding past, present or future classes to each div element with a class of time-block.
+//Depending on the hour of the day
 function textAreaColor() {
-   $(".time-block").each(function () {
+  $(".time-block").each(function () {
     var textAreaHour = parseInt($(this).attr("id").replace("hour-", ""));
     var currentTextAreaHour = parseInt(moment().format("H"));
-    
+
     $(this).removeClass("past present future");
+    if (textAreaHour < currentTextAreaHour) {
+      $(this).addClass("past");
+    } else if (textAreaHour > currentTextAreaHour) {
+      $(this).addClass("future");
+    } else {
+      $(this).addClass("present");
+    }
+  });
+}
+
+//Function handle save is the last piece. This function runs when the user pushes click.
