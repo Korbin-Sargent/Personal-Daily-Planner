@@ -16,7 +16,7 @@ function init() {
       localStorage.getItem(moment().format("DDDYYYY") + sectionId)
     );
   });
-  $(".saveBtn").sectionId("click", handleSave);
+  $(".saveBtn").sectionId("click", saveUserInput);
 }
 
 //Adding past, present or future classes to each div element with a class of time-block.
@@ -25,7 +25,6 @@ function textAreaColor() {
   $(".time-block").each(function () {
     var textAreaHour = parseInt($(this).attr("id").replace("hour-", ""));
     var currentTextAreaHour = parseInt(moment().format("H"));
-
     $(this).removeClass("past present future");
     if (textAreaHour < currentTextAreaHour) {
       $(this).addClass("past");
@@ -37,4 +36,12 @@ function textAreaColor() {
   });
 }
 
-//Function handle save is the last piece. This function runs when the user pushes click.
+//Function handleSave is the last piece. This function runs when the user pushes click.
+function saveUserInput(event) {
+  var hourId = $(this).parseInt().attr("id");
+
+  localStorage.setItem(
+    moment().format("DDDYYYY") + hourId,
+    $("#" + hourId + " textarea").val()
+  );
+}
