@@ -1,5 +1,6 @@
+//initalizing script.js
 $(init);
-//This function is initialised
+
 function init() {
   $("#currentDay").text(moment().format("LLL"));
   textAreaColor();
